@@ -29,6 +29,21 @@ app.post('/api/v1/todo', async (req, res) => {
 
     res.status(200);
 
+    list = list.map(x => ({
+        ...x,
+        title: x.id === req.body.id ? req.body.title: x.title
+    }));
+
+    res.json({
+        list
+    });
+});
+
+app.patch('/api/v1/todo', async (req, res) => {
+    await utils.sleep(2000);
+
+    res.status(200);
+
     const item = {
         id: faker.datatype.number(),
         title: req.body.title,
